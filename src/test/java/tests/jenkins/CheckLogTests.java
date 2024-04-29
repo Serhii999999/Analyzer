@@ -33,15 +33,15 @@ public class CheckLogTests {
         new BuildPage()
                 .clickConsoleOutputButton()
                 .clickFullLogButton();
-        var prodServerError = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_500);
-        var prodPages = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES);
-        var prodTitleMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING);
-        var prodTitleDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_DUPLICATE);
-        var prodMetaMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_MISSING);
-        var prodMetaDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_DUPLICATE);
-        var prodH1Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_MISSING);
-        var prodH1Duplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_DUPLICATE);
-        var prodH2Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H2_MISSING);
+        var prodServerError = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_500, UrlService.PROD_URL_CASINO);
+        var prodPages = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES, UrlService.PROD_URL_CASINO);
+        var prodTitleMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING, UrlService.PROD_URL_CASINO);
+        var prodTitleDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_DUPLICATE, UrlService.PROD_URL_CASINO);
+        var prodMetaMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_MISSING, UrlService.PROD_URL_CASINO);
+        var prodMetaDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_DUPLICATE, UrlService.PROD_URL_CASINO);
+        var prodH1Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_MISSING, UrlService.PROD_URL_CASINO);
+        var prodH1Duplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_DUPLICATE, UrlService.PROD_URL_CASINO);
+        var prodH2Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H2_MISSING, UrlService.PROD_URL_CASINO);
 
         softAssert.assertEquals(prodServerError,0, "500 on prod -");
         softAssert.assertEquals(prodTitleMissing,0,"missing title on prod - ");
@@ -58,16 +58,18 @@ public class CheckLogTests {
 
         new ScreamingFrogPage().preprodLinkClick();
         new ProjectPage().clickBuildLink();
-        new BuildPage().clickConsoleOutputButton();
-        var preProdServerError = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_500);
-        var preProdPages = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES);
-        var preProdTitleMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING);
-        var preProdTitleDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_DUPLICATE);
-        var preProdMetaMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_MISSING);
-        var preProdMetaDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_DUPLICATE);
-        var preProdH1Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_MISSING);
-        var preProdH1Duplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_DUPLICATE);
-        var preProdH2Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H2_MISSING);
+        new BuildPage()
+                .clickConsoleOutputButton()
+                .clickFullLogButton();
+        var preProdServerError = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_500, UrlService.PREPOD_URL_CASINO);
+        var preProdPages = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES, UrlService.PREPOD_URL_CASINO);
+        var preProdTitleMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING, UrlService.PREPOD_URL_CASINO);
+        var preProdTitleDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_DUPLICATE, UrlService.PREPOD_URL_CASINO);
+        var preProdMetaMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_MISSING, UrlService.PREPOD_URL_CASINO);
+        var preProdMetaDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_DUPLICATE, UrlService.PREPOD_URL_CASINO);
+        var preProdH1Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_MISSING, UrlService.PREPOD_URL_CASINO);
+        var preProdH1Duplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_DUPLICATE, UrlService.PREPOD_URL_CASINO);
+        var preProdH2Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H2_MISSING, UrlService.PREPOD_URL_CASINO);
 
         softAssert.assertEquals(preProdServerError,0, "500 on preProd -");
         softAssert.assertEquals(preProdTitleMissing,0,"missing title on preProd - ");

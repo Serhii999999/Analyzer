@@ -6,12 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import settingsPerEnv.reportAutomation.services.Constants;
+import settingsPerEnv.reportAutomation.services.UrlService;
 
 import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static common.settings.DriverInit.driver;
+import static settingsPerEnv.reportAutomation.services.Constants.REGEX_FOR_PAGES;
 
 public class Actions {
     public static void open(String url){
@@ -32,35 +34,36 @@ public class Actions {
         driver.navigate().back();
     }
 
-    public static int retrieveNumberFromPage(String pattern){
-        String desiredText = "";
-        WebElement preElement = new WebDriverWait
-                (driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("pre")));
-        String preText = preElement.getText();
-        Pattern patternMatch = Pattern.compile(pattern);
-        Matcher matcher = patternMatch.matcher(preText);
+//    public static int retrieveNumberFromPage(String pattern){
+//        String desiredText = "";
+//        WebElement preElement = new WebDriverWait
+//                (driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("pre")));
+//        String preText = preElement.getText();
+//        String url = "https://casinosanalyzer.com/";
+//        String constructedPattern = "\"Site Crawled\",\"" + url + "/\".*?" + Constants.REGEX_FOR_500;
+//        Pattern patternMatch = Pattern.compile(constructedPattern, Pattern.DOTALL);
+//        Matcher matcher = patternMatch.matcher(preText);
+//
+//        while (matcher.find()) {
+//            desiredText = matcher.group(1);
+//        }
+//        return Integer.parseInt(desiredText);
+//    }
 
-        while (matcher.find()) {
-            desiredText = matcher.group(1);
-        }
-        return Integer.parseInt(desiredText);
-    }
     public static boolean areApproximatelyEqual(int val1, int val2, int threshold){
         int difference = Math.abs(val1-val2);
         return difference <= threshold;
     }
-    public static int retrieveNumberFromPage1() {
+    public static int retrieveNumberFromPage(String p, String url) {
         WebElement preElement = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.tagName("pre")));
         String preText = preElement.getText();
 
-        String pattern = "\"Site Crawled\",\"https://casinosanalyzer.ca/\".*?\"Total URLs Encountered\",\"(\\d+)\",\"100\\.00%\",\"\\d+\",\"URLs Encountered\"";
-        System.out.println(pattern);
+        String pattern = "\"Site Crawled\",\"" + url + "/\".*?" + p;
         Pattern patternMatch = Pattern.compile(pattern, Pattern.DOTALL);
         Matcher matcher = patternMatch.matcher(preText);
 
         if (matcher.find()) {
-            System.out.println(Integer.parseInt(matcher.group(1)));
             return Integer.parseInt(matcher.group(1));
         } else {
             throw new RuntimeException("Pattern not found in the page content");

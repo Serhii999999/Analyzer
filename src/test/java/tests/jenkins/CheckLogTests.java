@@ -1,0 +1,92 @@
+package tests.jenkins;
+
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+import settingsPerEnv.reportAutomation.pages.BuildPage;
+import settingsPerEnv.reportAutomation.pages.LoginPage;
+import settingsPerEnv.reportAutomation.pages.ProjectPage;
+import settingsPerEnv.reportAutomation.pages.ScreamingFrogPage;
+import common.services.Actions;
+import settingsPerEnv.reportAutomation.services.Constants;
+import settingsPerEnv.reportAutomation.services.CredService;
+import settingsPerEnv.reportAutomation.services.UrlService;
+
+import static common.settings.DriverInit.driver;
+
+public class CheckLogTests {
+    LoginPage loginPage = new LoginPage();
+    private final int THRESHOLD = 30;
+    @BeforeTest
+    public void setUp()  {
+        Actions.open(UrlService.BASIC_URL_JENKINS);
+        loginPage.logInSystem(CredService.USERNAME, CredService.PASSWORD);
+    }
+    @Test
+    public void checkAllValuesAreCorrect(){
+        SoftAssert softAssert = new SoftAssert();
+        new ScreamingFrogPage()
+                .frogLink()
+                .prodLinkClick();
+        new ProjectPage().clickBuildLink();
+        new BuildPage()
+                .clickConsoleOutputButton()
+                .clickFullLogButton();
+        var prodServerError = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_500);
+        var prodPages = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES);
+        var prodTitleMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING);
+        var prodTitleDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_DUPLICATE);
+        var prodMetaMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_MISSING);
+        var prodMetaDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_DUPLICATE);
+        var prodH1Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_MISSING);
+        var prodH1Duplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_DUPLICATE);
+        var prodH2Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H2_MISSING);
+
+        softAssert.assertEquals(prodServerError,0, "500 on prod -");
+        softAssert.assertEquals(prodTitleMissing,0,"missing title on prod - ");
+        softAssert.assertEquals(prodTitleDuplicate,0,"duplicate titles on prod -");
+        softAssert.assertEquals(prodMetaMissing,0,"missing meta on prod -");
+        softAssert.assertEquals(prodMetaDuplicate,0,"duplicate meta on prod - ");
+        softAssert.assertEquals(prodH1Missing,0, "missing H1 on prod -");
+        softAssert.assertEquals(prodH1Duplicate,0,"duplicate H1 on prod -");
+        softAssert.assertEquals(prodH2Missing,0,"missing H2 on prod -");
+
+        Actions.navigateBack();
+        Actions.navigateBack();
+        Actions.navigateBack();
+
+        new ScreamingFrogPage().preprodLinkClick();
+        new ProjectPage().clickBuildLink();
+        new BuildPage().clickConsoleOutputButton();
+        var preProdServerError = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_500);
+        var preProdPages = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES);
+        var preProdTitleMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING);
+        var preProdTitleDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_DUPLICATE);
+        var preProdMetaMissing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_MISSING);
+        var preProdMetaDuplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_META_DUPLICATE);
+        var preProdH1Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_MISSING);
+        var preProdH1Duplicate = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H1_DUPLICATE);
+        var preProdH2Missing = Actions.retrieveNumberFromPage(Constants.REGEX_FOR_H2_MISSING);
+
+        softAssert.assertEquals(preProdServerError,0, "500 on preProd -");
+        softAssert.assertEquals(preProdTitleMissing,0,"missing title on preProd - ");
+        softAssert.assertEquals(preProdTitleDuplicate,0,"duplicate titles on preProd -");
+        softAssert.assertEquals(preProdMetaMissing,0,"missing meta on preProd -");
+        softAssert.assertEquals(preProdMetaDuplicate,0,"duplicate meta on preProd - ");
+        softAssert.assertEquals(preProdH1Missing,0,"missing H1 on preProd -");
+        softAssert.assertEquals(preProdH1Duplicate,0,"duplicate H1 on preProd -");
+        softAssert.assertEquals(preProdH2Missing,0,"missing H2 on preProd -");
+        softAssert.assertTrue(Actions.areApproximatelyEqual(prodPages,preProdPages, THRESHOLD ),
+                "there is a big difference between amount of pages on prod and preProd");
+        softAssert.assertAll();
+    }
+
+        @AfterTest
+    public void tearDown(){
+        if(driver!=null) {
+            driver.quit();
+        }
+    }
+
+}

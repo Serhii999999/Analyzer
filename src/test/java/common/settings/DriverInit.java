@@ -2,6 +2,7 @@ package common.settings;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 
 public class DriverInit {
@@ -9,7 +10,13 @@ public class DriverInit {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            driver = new ChromeDriver();
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("--headless");
+            chromeOptions.addArguments("--no-sandbox");
+            chromeOptions.addArguments("--disable-dev-shm-usage");
+            chromeOptions.addArguments("--disable-gpu");
+
+            driver = new ChromeDriver(chromeOptions);
         }
         return driver;
     }

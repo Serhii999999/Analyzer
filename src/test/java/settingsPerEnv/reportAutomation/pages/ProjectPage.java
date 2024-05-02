@@ -8,12 +8,14 @@ import common.settings.DriverInit;
 import static common.settings.DriverInit.driver;
 
 public class ProjectPage {
-    public ProjectPage(){
-    WebDriver driver = DriverInit.getDriver();
-
+    private WebDriver driver;
+    private Actions actions;
+    public ProjectPage(WebDriver driver){
+        this.driver = driver;
+        actions = new Actions(driver);
 }
     public ProjectPage clickBuildLink(){
-        Actions.click(driver.findElement(By.xpath("//a[@tooltip='Success > Console Output']")));
-        return new ProjectPage();
+        actions.click(driver.findElement(By.xpath("//a[@tooltip='Success > Console Output']")));
+        return new ProjectPage(driver);
     }
 }

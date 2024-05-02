@@ -7,10 +7,11 @@ import common.settings.DriverInit;
 import static common.settings.DriverInit.driver;
 
 public class LoginPage {
-    public LoginPage(){
-        WebDriver driver = DriverInit.getDriver();
+    private WebDriver driver;
+    public LoginPage(WebDriver driver){
+        this.driver= driver;
     }
-    public static void logInSystem(String login, String password) {
+    public void logInSystem(String login, String password) {
         driver.findElement(By.id("j_username")).sendKeys(login);
         driver.findElement(By.id("j_password")).sendKeys(password);
         driver.findElement(By.xpath("//*[@name='Submit']")).click();

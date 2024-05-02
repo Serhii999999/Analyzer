@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterTest;
 
 public class DriverInit {
-    public static WebDriver driver;
+    private static WebDriver driver;
 
     public static WebDriver getDriver() {
         if (driver == null) {

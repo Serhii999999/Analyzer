@@ -2,6 +2,7 @@ package common.services;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,21 +17,25 @@ import static common.settings.DriverInit.driver;
 import static settingsPerEnv.reportAutomation.services.Constants.REGEX_FOR_PAGES;
 
 public class Actions {
-    public static void open(String url){
+    private WebDriver driver;
+    public Actions(WebDriver driver){
+        this.driver= driver;
+    }
+    public  void open(String url){
         driver.navigate().to(url);
     }
-    public static void click(WebElement element) {
+    public  void click(WebElement element) {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable
                 (element));
         if(element.isDisplayed()){
             element.click();
         }
     }
-    public static void clickWithJS(WebElement element){
+    public void clickWithJS(WebElement element){
         JavascriptExecutor executor = (JavascriptExecutor)driver;
         executor.executeScript("arguments[0].click();", element);
     }
-    public static void navigateBack(){
+    public  void navigateBack(){
         driver.navigate().back();
     }
 
@@ -50,11 +55,11 @@ public class Actions {
 //        return Integer.parseInt(desiredText);
 //    }
 
-    public static boolean areApproximatelyEqual(int val1, int val2, int threshold){
+    public  boolean areApproximatelyEqual(int val1, int val2, int threshold){
         int difference = Math.abs(val1-val2);
         return difference <= threshold;
     }
-    public static int retrieveNumberFromPage(String p, String url) {
+    public  int retrieveNumberFromPage(String p, String url) {
         WebElement preElement = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.tagName("pre")));
         String preText = preElement.getText();

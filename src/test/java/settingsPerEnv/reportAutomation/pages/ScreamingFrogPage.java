@@ -13,17 +13,14 @@ public class ScreamingFrogPage {
         actions = new Actions(driver);
 
     }
-    public ScreamingFrogPage frogLink(){
+    public void frogLink(){
         actions.clickWithJS(driver.findElement(By.xpath("//span[text()='ScreamingFrog']")));
-        return new ScreamingFrogPage(driver);
     }
-    public ScreamingFrogPage preprodLinkClick(){
+    public void preprodLinkClick(){
         actions.clickWithJS(driver.findElement(By.xpath("//td//span[text()='preprod']")));
-        return new ScreamingFrogPage(driver);
     }
-    public ScreamingFrogPage prodLinkClick(){
+    public void prodLinkClick(){
         actions.clickWithJS(driver.findElement(By.xpath("//td//span[text()='prod']")));
-        return new ScreamingFrogPage(driver);
     }
 
 }

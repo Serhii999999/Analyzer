@@ -19,12 +19,18 @@ import settingsPerEnv.reportAutomation.services.UrlService;
 public class CheckLogTests {
     private WebDriver driver;
     private LoginPage loginPage;
+    private BuildPage buildPage;
+    private ProjectPage projectPage;
+    private ScreamingFrogPage screamingFrogPage;
     private Actions actions;
     private final int THRESHOLD = 30;
     @BeforeTest
     public void setUp()  {
         driver = DriverInit.getDriver();
         loginPage = new LoginPage(driver);
+        buildPage = new BuildPage(driver);
+        projectPage = new ProjectPage(driver);
+        screamingFrogPage = new ScreamingFrogPage(driver);
         actions = new Actions(driver);
         actions.open(UrlService.BASIC_URL_JENKINS);
         loginPage.logInSystem(CredService.USERNAME, CredService.PASSWORD);
@@ -32,13 +38,11 @@ public class CheckLogTests {
     @Test
     public void checkAllValuesAreCorrect(){
         SoftAssert softAssert = new SoftAssert();
-        new ScreamingFrogPage(driver)
-                .frogLink()
-                .prodLinkClick();
+        screamingFrogPage.frogLink();
+        screamingFrogPage.prodLinkClick();
         new ProjectPage(driver).clickBuildLink();
-        new BuildPage(driver)
-                .clickConsoleOutputButton()
-                .clickFullLogButton();
+        buildPage.clickConsoleOutputButton();
+        buildPage.clickFullLogButton();
         var prodServerError = actions.retrieveNumberFromPage(Constants.REGEX_FOR_500, UrlService.PROD_URL_CASINO);
         var prodPages = actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES, UrlService.PROD_URL_CASINO);
         var prodTitleMissing = actions.retrieveNumberFromPage(Constants.REGEX_FOR_TITLE_MISSING, UrlService.PROD_URL_CASINO);
@@ -160,9 +164,8 @@ public class CheckLogTests {
 
         new ScreamingFrogPage(driver).preprodLinkClick();
         new ProjectPage(driver).clickBuildLink();
-        new BuildPage(driver)
-                .clickConsoleOutputButton()
-                .clickFullLogButton();
+        buildPage.clickConsoleOutputButton();
+        buildPage.clickFullLogButton();
 
         var preProdServerError = actions.retrieveNumberFromPage(Constants.REGEX_FOR_500, UrlService.PREPOD_URL_CASINO);
         var preProdPages = actions.retrieveNumberFromPage(Constants.REGEX_FOR_PAGES, UrlService.PREPOD_URL_CASINO);

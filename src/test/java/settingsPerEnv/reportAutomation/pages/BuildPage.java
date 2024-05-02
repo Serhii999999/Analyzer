@@ -11,12 +11,10 @@ public class BuildPage {
         this.driver = driver;
         actions = new Actions(driver);
     }
-    public BuildPage clickConsoleOutputButton(){
+    public void clickConsoleOutputButton(){
         actions.click(driver.findElement(By.xpath("//*[text()='Console Output']")));
-        return new BuildPage(driver);
     }
-    public BuildPage clickFullLogButton(){
+    public void clickFullLogButton(){
         actions.click(driver.findElement(By.xpath("//a[text()='Full Log']")));
-        return new BuildPage(driver);
     }
 }

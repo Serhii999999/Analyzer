@@ -11,8 +11,7 @@ public class ProjectPage {
         this.driver = driver;
         actions = new Actions(driver);
 }
-    public ProjectPage clickBuildLink(){
+    public void clickBuildLink(){
         actions.click(driver.findElement(By.xpath("//a[@tooltip='Success > Console Output']")));
-        return new ProjectPage(driver);
     }
 }

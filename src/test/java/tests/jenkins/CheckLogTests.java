@@ -20,7 +20,6 @@ public class CheckLogTests {
     private WebDriver driver;
     private LoginPage loginPage;
     private BuildPage buildPage;
-    private ProjectPage projectPage;
     private ScreamingFrogPage screamingFrogPage;
     private Actions actions;
     private final int THRESHOLD = 30;
@@ -29,7 +28,6 @@ public class CheckLogTests {
         driver = DriverInit.getDriver();
         loginPage = new LoginPage(driver);
         buildPage = new BuildPage(driver);
-        projectPage = new ProjectPage(driver);
         screamingFrogPage = new ScreamingFrogPage(driver);
         actions = new Actions(driver);
         actions.open(UrlService.BASIC_URL_JENKINS);

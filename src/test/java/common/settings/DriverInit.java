@@ -12,6 +12,16 @@ public class DriverInit {
         if (driver == null) {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--headless");
+            chromeOptions.addArguments("--start-maximized");
+            chromeOptions.addArguments("--test-type");
+            chromeOptions.addArguments("--no-sandbox");
+            chromeOptions.addArguments("--ignore-certificate-errors");
+            chromeOptions.addArguments("--disable-popup-blocking");
+            chromeOptions.addArguments("--disable-default-apps");
+            chromeOptions.addArguments("--disable-extensions-file-access-check");
+            chromeOptions.addArguments("--incognito");
+            chromeOptions.addArguments("--disable-infobars");
+            chromeOptions.addArguments("--disable-gpu");
             driver = new ChromeDriver(chromeOptions);
         }
         return driver;

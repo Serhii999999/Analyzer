@@ -2,9 +2,6 @@ package settingsPerEnv.reportAutomation.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import common.settings.DriverInit;
-
-import static common.settings.DriverInit.driver;
 
 public class LoginPage {
     private WebDriver driver;

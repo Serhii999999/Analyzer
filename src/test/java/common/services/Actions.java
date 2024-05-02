@@ -6,15 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import settingsPerEnv.reportAutomation.services.Constants;
-import settingsPerEnv.reportAutomation.services.UrlService;
 
 import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static common.settings.DriverInit.driver;
-import static settingsPerEnv.reportAutomation.services.Constants.REGEX_FOR_PAGES;
 
 public class Actions {
     private WebDriver driver;

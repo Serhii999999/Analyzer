@@ -16,12 +16,11 @@ import settingsPerEnv.reportAutomation.services.UrlService;
 import static common.settings.DriverInit.driver;
 
 public class CheckLogTests {
-    LoginPage loginPage = new LoginPage();
     private final int THRESHOLD = 30;
     @BeforeTest
     public void setUp()  {
         Actions.open(UrlService.BASIC_URL_JENKINS);
-        loginPage.logInSystem(CredService.USERNAME, CredService.PASSWORD);
+        LoginPage.logInSystem(CredService.USERNAME, CredService.PASSWORD);
     }
     @Test
     public void checkAllValuesAreCorrect(){

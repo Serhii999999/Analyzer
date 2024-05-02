@@ -12,10 +12,6 @@ public class DriverInit {
         if (driver == null) {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--headless");
-            chromeOptions.addArguments("--no-sandbox");
-            chromeOptions.addArguments("--disable-dev-shm-usage");
-            chromeOptions.addArguments("--disable-gpu");
-
             driver = new ChromeDriver(chromeOptions);
         }
         return driver;

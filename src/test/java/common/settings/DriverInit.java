@@ -10,8 +10,8 @@ public class DriverInit {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-//            String driverPath = "/home/jenkins/workspace/ScreamingFrog/DemoJenkins/src/test/java/common/settings/chromedriver";
-//            System.setProperty("webdriver.chrome.driver", driverPath);
+            String driverPath = "/home/jenkins/workspace/ScreamingFrog/DemoJenkins/src/test/java/common/settings/chromedriver";
+            System.setProperty("webdriver.chrome.driver", driverPath);
 
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--headless");

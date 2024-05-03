@@ -10,7 +10,7 @@ public class DriverInit {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            String driverPath = "src/test/java/common/settings/chromedriver.exe";
+            String driverPath = "/home/jenkins/workspace/ScreamingFrog/DemoJenkins/src/test/java/common/settings/chromedriver";
             System.setProperty("webdriver.chrome.driver", driverPath);
 
             ChromeOptions chromeOptions = new ChromeOptions();

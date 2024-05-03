@@ -10,6 +10,8 @@ public class DriverInit {
 
     public static WebDriver getDriver() {
         if (driver == null) {
+            String driverPath = "src/test/java/common/settings/chromedriver";
+            System.setProperty("webdriver.chrome.driver", driverPath);
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("--headless");
             chromeOptions.addArguments("--start-maximized");

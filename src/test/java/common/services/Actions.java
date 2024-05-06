@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,22 +35,6 @@ public class Actions {
     public  void navigateBack(){
         driver.navigate().back();
     }
-
-//    public static int retrieveNumberFromPage(String pattern){
-//        String desiredText = "";
-//        WebElement preElement = new WebDriverWait
-//                (driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(By.tagName("pre")));
-//        String preText = preElement.getText();
-//        String url = "https://casinosanalyzer.com/";
-//        String constructedPattern = "\"Site Crawled\",\"" + url + "/\".*?" + Constants.REGEX_FOR_500;
-//        Pattern patternMatch = Pattern.compile(constructedPattern, Pattern.DOTALL);
-//        Matcher matcher = patternMatch.matcher(preText);
-//
-//        while (matcher.find()) {
-//            desiredText = matcher.group(1);
-//        }
-//        return Integer.parseInt(desiredText);
-//    }
 
     public  boolean areApproximatelyEqual(int val1, int val2, int threshold){
         int difference = Math.abs(val1-val2);
